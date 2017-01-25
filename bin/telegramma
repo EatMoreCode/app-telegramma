@@ -1,0 +1,10 @@
+#!/usr/bin/env perl
+
+use FindBin qw($Bin);
+use lib "$Bin/../lib";
+
+use App::TeleGramma;
+
+my $bot = App::TeleGramma->new;
+$bot->startup;
+$bot->think;
