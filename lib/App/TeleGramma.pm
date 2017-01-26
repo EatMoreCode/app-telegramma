@@ -11,7 +11,7 @@ use feature 'say';
 
 has 'config';
 has 'plugins';
-has 'token' => '267770718:AAGHRP-_OzW5-WRajtkPSMPnGs0kAdc733k';
+has 'token';
 
 # prepare/read config
 sub startup {
@@ -27,19 +27,31 @@ sub startup {
 
   # prep plugins
   $self->plugins(App::TeleGramma::PluginManager->new(config => $self->config));
+  $self->plugins->load_plugins;
 
-  $self->plugins->list;
+  # load token
+  $self->config->read;
+  $self->token($self->config->config->{_}->{bot_token});
 
+}
+
+sub bail_if_misconfigured {
+  my $self = shift;
+
+  if (! $self->token) {
+    die "config file does not have a bot token - bailing out\n";
+  }
+
+  if ($self->token =~ /please/i) {
+    die "config file has the default bot token - bailing out\n";
+  }
 }
 
 sub init {
   # override bot brain here
 }
 
-# load plugins
 sub setup {
-
-
 }
 
 1;

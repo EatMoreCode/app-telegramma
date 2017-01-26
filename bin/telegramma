@@ -2,9 +2,20 @@
 
 use FindBin qw($Bin);
 use lib "$Bin/../lib";
+use feature 'say';
 
 use App::TeleGramma;
 
 my $bot = App::TeleGramma->new;
 $bot->startup;
-$bot->think;
+
+if (@ARGV) {
+  foreach (@{ $bot->plugins->list }) {
+    say ref($_) . " - " . $_->synopsis;
+  }
+}
+
+else {
+  $bot->bail_if_misconfigured;
+  $bot->think;
+}

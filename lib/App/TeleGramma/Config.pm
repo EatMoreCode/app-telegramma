@@ -24,8 +24,7 @@ sub write {
 
 sub default_config {
   [
-    'general' => [ bot_token => 'please change me, see: https://telegram.me/BotFather' ],
-    'plugins' => [],
+    '_' => [ bot_token => 'please change me, see: https://telegram.me/BotFather' ],
   ],
 }
 

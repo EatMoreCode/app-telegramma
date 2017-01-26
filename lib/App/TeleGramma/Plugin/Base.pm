@@ -4,7 +4,7 @@ use Mojo::Base -base;
 
 has 'app_config';
 
-sub _package_to_ini_section {
+sub short_name {
   my $self = shift;
   my $package = ref($self);
   $package =~ s/^App::TeleGramma::Plugin:://;
@@ -13,24 +13,42 @@ sub _package_to_ini_section {
   return "plugin-" . $package;
 }
 
+# override: optional
 sub default_config { {} }
+
+# override: optional
+sub check_prereqs {
+  1;
+}
+
+# override: optional but HIGHLY RECOMMENDED
+sub synopsis {
+  "My author did not provide a synopsis!";
+}
+
+# override: REQUIRED
+sub register {
+  my $self = shift;
+  die ref($self) .  " did not supply a register method\n";
+}
 
 sub create_default_config_if_necessary {
   my $self = shift;
-  my $section = $self->_package_to_ini_section();
+  my $section = $self->short_name();
 
   $self->app_config->read();
 
-  if (%{ $self->default_config } && ! %{ $self->read_config }) {
+  if (! %{ $self->read_config }) {
     $self->app_config->config->{$section} = $self->default_config;
+    $self->app_config->config->{$section}->{enable} = 'no';
     $self->app_config->write();
   }
-
 }
 
 sub read_config {
   my $self = shift;
-  my $section = $self->_package_to_ini_section();
+  my $section = $self->short_name();
+  $self->app_config->read();
   return $self->app_config->config->{$section} || {};
 }
 
