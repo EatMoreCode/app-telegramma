@@ -73,6 +73,9 @@ Your new config has been created in $path
 
 Please edit it now and update the Telegram Bot token, then
 re-run $0.
+
+The configuration will have an entry for each plugin currently available on
+your system, but disabled.
 EOF
 }
 

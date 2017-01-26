@@ -29,11 +29,14 @@ sub load_plugins {
     my $o = $p->new(app_config => $self->config);
     $o->create_default_config_if_necessary;
 
-    push @{ $self->list }, $o
-      if ($o->read_config->{enable} =~ /yes/i);
+    if ($o->read_config->{enable} =~ /yes/i) {
 
-    # register it
-    $o->register;
+      # register it
+      my $botactions = $o->register;
+
+      # add it to our list of plugins
+      push @{ $self->list }, $o;
+    }
   }
 }
 
