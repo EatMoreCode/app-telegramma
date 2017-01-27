@@ -12,7 +12,7 @@ sub process_message {
 
   my $cmd = $self->command;
 
-  if ($msg->text =~ /^\Q$cmd\E/) {
+  if ($msg->text =~ /^\Q$cmd\E \b @? /x) {
     return $self->response->($msg);
   }
 
