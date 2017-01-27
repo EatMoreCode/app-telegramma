@@ -10,7 +10,9 @@ sub process_message {
   my $self = shift;
   my $msg  = shift;
 
-  if ($self->command eq $msg->text) {
+  my $cmd = $self->command;
+
+  if ($msg->text =~ /^\Q$cmd\E/) {
     return $self->response->($msg);
   }
 
