@@ -3,10 +3,12 @@ package App::TeleGramma::Plugin::Base;
 use Mojo::Base -base;
 
 use App::TeleGramma::Constants qw/:const/;
+use App::TeleGramma::Store;
+use File::Spec::Functions qw/catdir/;
 
 has 'app_config';
 has 'app';
-
+has '_store';
 
 sub short_name {
   my $self = shift;
@@ -64,6 +66,19 @@ sub reply_to {
   my $app = $self->app;
 
   $app->send_message_to_chat_id($msg->chat->id, $reply);
+}
+
+sub store {
+  my $self = shift;
+  return $self->_store if ($self->_store);
+  my $data_dir = catdir($self->app_config->path_plugin_data, $self->short_name);
+  mkdir $data_dir unless -d $data_dir;
+  my $store_dir = catdir($data_dir, 'store');
+  mkdir $store_dir unless -d $store_dir;
+
+  my $store = App::TeleGramma::Store->new(path => $store_dir);
+  $self->_store($store);
+  return $store;
 }
 
 1;

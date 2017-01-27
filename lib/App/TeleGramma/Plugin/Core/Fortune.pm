@@ -28,7 +28,12 @@ sub register {
     command  => '/fortune',
     response => sub { $self->emit_fortune(@_) }
   );
-  return ($fortune_command);
+  my $stats_command = App::TeleGramma::BotAction::Listen->new(
+    command  => '/fortunestats',
+    response => sub { $self->emit_stats(@_) }
+  );
+
+  return ($fortune_command, $stats_command);
 }
 
 sub emit_fortune {
@@ -36,6 +41,33 @@ sub emit_fortune {
   my $msg  = shift;
 
   $self->reply_to($msg, $self->_get_fortune());
+
+  # keep some stats, separated by chat and totals
+  my $chat_id = $msg->chat->id;
+  my $username = $msg->from->username;
+
+  $self->store->hash('counts_'.$chat_id)->{$username}++;
+  $self->store->hash('totals')->{total_fortunes}++;
+  $self->store->save_all;
+
+  return PLUGIN_RESPONDED;
+}
+
+sub emit_stats {
+  my $self = shift;
+  my $msg  = shift;
+
+  my $chat_id = $msg->chat->id;
+  my $res;
+
+  foreach my $username ( keys %{ $self->store->hash('counts_'.$chat_id) }) {
+    $res .= "$username => " . $self->store->hash('counts_'.$chat_id)->{$username} . "\n";
+  }
+
+  $res .= "global count => " . ($self->store->hash('totals')->{total_fortunes} || 0);
+
+  $self->reply_to($msg, $res);
+
   return PLUGIN_RESPONDED;
 }
 

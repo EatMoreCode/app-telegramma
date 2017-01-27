@@ -11,6 +11,7 @@ sub path_base    { catdir($ENV{HOME}, '.telegramma') }
 sub path_config  { catdir(shift->path_base, 'telegramma.ini') }
 sub path_plugins { catdir(shift->path_base, 'plugins') }
 sub path_logs    { catdir(shift->path_base, 'logs') }
+sub path_plugin_data { catdir(shift->path_base, 'plugindata') }
 
 sub read {
   my $self = shift;
@@ -34,6 +35,7 @@ sub create_if_necessary {
   foreach my $path (
     $self->path_base,
     $self->path_plugins,
+    $self->path_plugin_data,
     catdir($self->path_plugins, 'App'),
     catdir($self->path_plugins, 'App/TeleGramma'),
     catdir($self->path_plugins, 'App/TeleGramma/Plugin'),
