@@ -6,6 +6,8 @@ use Mojo::Base 'Telegram::Bot::Brain';
 
 use App::TeleGramma::Config;
 use App::TeleGramma::PluginManager;
+use App::TeleGramma::Plugin::Base;
+use App::TeleGramma::Constants qw/:const/;
 
 use feature 'say';
 
@@ -68,8 +70,15 @@ sub incoming_message {
   # pass it to all registered plugin listeners
   foreach my $listener (@{ $self->plugins->listeners }) {
     # call each one
-    # XXX use the result to decide if we keep going
     my $res = $listener->process_message($msg);
+    if (! $res) {
+      warn "listener did not provide a response";
+      next;
+    }
+    if (($res eq PLUGIN_NO_RESPONSE_LAST) ||
+        ($res eq PLUGIN_RESPONDED_LAST)) {
+          last;
+    }
   }
 }
 

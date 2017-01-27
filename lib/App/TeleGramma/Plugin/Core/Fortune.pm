@@ -2,13 +2,10 @@ package App::TeleGramma::Plugin::Core::Fortune;
 
 use Mojo::Base 'App::TeleGramma::Plugin::Base';
 use App::TeleGramma::BotAction::Listen;
+use App::TeleGramma::Constants qw/:const/;
 
 use File::Spec::Functions qw/catfile/;
 use Mojo::Util qw/slurp/;
-
-BEGIN {
-  App::TeleGramma::Plugin::Base->import(':const');
-}
 
 sub synopsis {
   "Responds with fortunes"

@@ -1,25 +1,12 @@
 package App::TeleGramma::Plugin::Base;
 
 use Mojo::Base -base;
-use Exporter qw/import/;
+
+use App::TeleGramma::Constants qw/:const/;
 
 has 'app_config';
 has 'app';
 
-use constant {
-  PLUGIN_NO_RESPONSE      => 'NO_RESPONSE',
-  PLUGIN_NO_RESPONSE_LAST => 'NO_RESPONSE_LAST',
-  PLUGIN_RESPONDED        => 'RESPONDED',
-  PLUGIN_RESPONDED_LAST   => 'RESPONDED_LAST'
-};
-
-our @EXPORT_OK = qw/
-  PLUGIN_NO_RESPONSE
-  PLUGIN_NO_RESPONSE_LAST
-  PLUGIN_RESPONDED
-  PLUGIN_RESPONDED_LAST
-/;
-our %EXPORT_TAGS = (const => \@EXPORT_OK);
 
 sub short_name {
   my $self = shift;
