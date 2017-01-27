@@ -6,8 +6,8 @@ use Config::INI::Writer 0.025;
 use Config::INI::Reader 0.025;
 
 has config => sub { {} };
+has 'path_base' => sub { catdir($ENV{HOME}, '.telegramma') };
 
-sub path_base    { catdir($ENV{HOME}, '.telegramma') }
 sub path_config  { catdir(shift->path_base, 'telegramma.ini') }
 sub path_plugins { catdir(shift->path_base, 'plugins') }
 sub path_logs    { catdir(shift->path_base, 'logs') }

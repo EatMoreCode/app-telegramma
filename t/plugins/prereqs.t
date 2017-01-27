@@ -21,17 +21,24 @@ open my $fh, ">", catfile($dir, "TestPrereq.pm") || die $!;
 
 print $fh "package App::TeleGramma::Plugin::Test::TestPrereq;\n";
 print $fh "use Mojo::Base 'App::TeleGramma::Plugin::Base';\n";
+print $fh "sub register { () }\n";
 print $fh "1;\n";
 close $fh;
 
 use App::TeleGramma::PluginManager;
 use App::TeleGramma::Config;
 
-my $cfg = App::TeleGramma::Config->new;
+my $cfg = App::TeleGramma::Config->new(path_base => $td);
+$cfg->create_if_necessary;
+
 my $pm = App::TeleGramma::PluginManager->new(config => $cfg, search_dirs => $td);
 $pm->load_plugins;
 
-done_testing;
+is (@{ $pm->list }, 0, 'no plugins loaded');
+$cfg->config->{'plugin-Test-TestPrereq'}->{enable} = 'yes';
+$cfg->write();
 
+$pm->load_plugins;
+is (@{ $pm->list }, 1, '1 plugin loaded');
 
-1;
+done_testing();
