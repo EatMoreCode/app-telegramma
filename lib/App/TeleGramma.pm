@@ -18,16 +18,19 @@ sub startup {
   my $self = shift;
 
   # prep config
+  my $config_was_created = 0;
   $self->config(App::TeleGramma::Config->new);
   $self->config->create_if_necessary && do
     {
       say $self->config->config_created_message;
-      exit 0;
+      $config_was_created = 1;
     };
 
   # prep plugins
-  $self->plugins(App::TeleGramma::PluginManager->new(config => $self->config));
+  $self->plugins(App::TeleGramma::PluginManager->new(config => $self->config, app => $self));
   $self->plugins->load_plugins;
+
+  exit 0 if $config_was_created;
 
   # load token
   $self->config->read;
@@ -48,10 +51,26 @@ sub bail_if_misconfigured {
 }
 
 sub init {
-  # override bot brain here
+  my $self = shift;
+
+  # add a listener which will pass every message to each listen plugin
+  $self->add_listener(
+    sub { 1 },  # everything matches
+    \&incoming_message
+  );
+
 }
 
-sub setup {
+sub incoming_message {
+  my $self = shift;
+  my $msg  = shift;
+
+  # pass it to all registered plugin listeners
+  foreach my $listener (@{ $self->plugins->listeners }) {
+    # call each one
+    # XXX use the result to decide if we keep going
+    my $res = $listener->process_message($msg);
+  }
 }
 
 1;
