@@ -5,13 +5,14 @@ use File::Spec::Functions qw/catdir/;
 use Config::INI::Writer 0.025;
 use Config::INI::Reader 0.025;
 
-has config => sub { {} };
-has 'path_base' => sub { catdir($ENV{HOME}, '.telegramma') };
+has config    => sub { {} };
+has path_base => sub { catdir($ENV{HOME}, '.telegramma') };
 
-sub path_config  { catdir(shift->path_base, 'telegramma.ini') }
-sub path_plugins { catdir(shift->path_base, 'plugins') }
-sub path_logs    { catdir(shift->path_base, 'logs') }
+sub path_config      { catdir(shift->path_base, 'telegramma.ini') }
+sub path_plugins     { catdir(shift->path_base, 'plugins') }
+sub path_logs        { catdir(shift->path_base, 'logs') }
 sub path_plugin_data { catdir(shift->path_base, 'plugindata') }
+sub path_pid         { catdir(shift->path_base, 'telegramma.pid') }
 
 sub read {
   my $self = shift;

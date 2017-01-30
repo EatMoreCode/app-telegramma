@@ -10,6 +10,13 @@ has 'app_config';
 has 'app';
 has '_store';
 
+sub truncated_package_name {
+  my $self = shift;
+  my $package = ref($self);
+  $package =~ s/^App::TeleGramma::Plugin:://;
+  return $package;
+}
+
 sub short_name {
   my $self = shift;
   my $package = ref($self);
@@ -79,6 +86,7 @@ sub store {
   my $self = shift;
   return $self->_store if ($self->_store);
   my $data_dir = $self->data_dir;
+
   my $store_dir = catdir($data_dir, 'store');
   mkdir $store_dir unless -d $store_dir;
 

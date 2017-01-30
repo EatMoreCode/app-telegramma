@@ -5,17 +5,84 @@ use lib "$Bin/../lib";
 use feature 'say';
 
 use App::TeleGramma;
+use Getopt::Long qw/GetOptions/;
+use Proc::Daemon;
+
+use strict;
+use warnings;
+
+my $daemon_mode = 1;
+my $verbose     = 0;
+my $shutdown    = 0;
+my $status      = 0;
+my $plugin_cmd;
+
+GetOptions(
+  "daemon!"  => \$daemon_mode,
+  "status"   => \$status,
+  "shutdown" => \$shutdown,
+  "verbose"  => \$verbose,
+  "plugin=s" => \$plugin_cmd,
+) || die "Bad command line\n";
 
 my $bot = App::TeleGramma->new;
 $bot->startup;
 
-if (@ARGV) {
+if ($plugin_cmd && $plugin_cmd eq 'list') {
+  say "enabled plugins:";
   foreach (@{ $bot->plugins->list }) {
-    say ref($_) . " - " . $_->synopsis;
+    say " - " . $_->truncated_package_name . " - " . $_->synopsis;
   }
+  exit;
+}
+
+elsif ($plugin_cmd) {
+  die "Unknown plugin command '$plugin_cmd'\n";
 }
 
 else {
   $bot->bail_if_misconfigured;
-  $bot->think;
+
+  my $daemon = Proc::Daemon->new(
+    pid_file => $bot->config->path_pid
+  );
+
+  if ($shutdown) {
+    if (my $existing_pid = $daemon->Status) {
+      $daemon->Kill_Daemon;
+      say "Killed $existing_pid" if ($verbose);
+      exit;
+    }
+    say "Not running?";
+    exit;
+  }
+
+  if ($status) {
+    if (my $existing_pid = $daemon->Status) {
+      say "Running: $existing_pid";
+      exit;
+    }
+    else {
+      die "Is not running\n";
+    }
+  }
+
+  if (my $existing_pid = $daemon->Status) {
+    die "Already running, pid: $existing_pid\n";
+  }
+
+  if ($daemon_mode) {
+    my $child_pid = $daemon->Init;
+    unless ($child_pid) {
+      $bot->think;
+      exit; # never reached
+    }
+    say "Daemon started in $child_pid";
+  }
+  else {
+    say "App::TeleGramma running in foreground: $$";
+    $bot->think;
+    exit; # next reached
+  }
 }
+#     $SIG{'INT'} = sub { exit; };
