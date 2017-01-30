@@ -1,5 +1,7 @@
 package App::TeleGramma::BotAction::ListenAll;
 
+# ABSTRACT: Base class for bot actions that listen to all messages, indiscriminately
+
 use Mojo::Base 'App::TeleGramma::BotAction';
 use App::TeleGramma::Constants qw/:const/;
 

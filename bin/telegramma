@@ -1,5 +1,14 @@
 #!/usr/bin/env perl
 
+# PODNAME: telegramma
+# ABSTRACT: TeleGramma main application
+
+=head1 SYNOPSIS
+
+See L<App::TeleGramma>
+
+=cut
+
 use FindBin qw($Bin);
 use lib "$Bin/../lib";
 use feature 'say';

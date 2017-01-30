@@ -2,6 +2,10 @@
 
 App::TeleGramma - A modular Telegram Bot
 
+# VERSION
+
+version 0.01
+
 # SYNOPSIS
 
 Install App::TeleGramma and its dependencies
@@ -42,6 +46,10 @@ TeleGramma is an easy to use, extensible bot to use with Telegram `www.telegram.
 Its plugin architecture makes it easy to add new modules either from other authors,
 or yourself.
 
+# NAME
+
+App::TeleGramma - A modular Telegram Bot
+
 # BUGS
 
 None known.
@@ -53,3 +61,14 @@ Justin Hawkins `justin@eatmorecode.com`
 # SEE ALSO
 
 [Telegram::Bot](https://metacpan.org/pod/Telegram::Bot) - the lower level API
+
+# AUTHOR
+
+Justin Hawkins <justin@eatmorecode.com>
+
+# COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2017 by Justin Hawkins <justin@eatmorecode.com>.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.

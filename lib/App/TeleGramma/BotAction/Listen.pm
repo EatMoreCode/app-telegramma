@@ -1,5 +1,7 @@
 package App::TeleGramma::BotAction::Listen;
 
+# ABSTRACT: Base class for bot actions that listen
+
 use Mojo::Base 'App::TeleGramma::BotAction';
 use App::TeleGramma::Constants qw/:const/;
 

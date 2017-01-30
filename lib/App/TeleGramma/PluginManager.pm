@@ -1,5 +1,7 @@
 package App::TeleGramma::PluginManager;
 
+# ABSTRACT: Plugin manager for the TeleGramma bot
+
 use Mojo::Base -base;
 use File::Spec::Functions qw/catdir/;
 

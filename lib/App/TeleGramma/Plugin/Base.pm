@@ -1,5 +1,7 @@
 package App::TeleGramma::Plugin::Base;
 
+# ABSTRACT: Base class for TeleGramma plugins
+
 use Mojo::Base -base;
 
 use App::TeleGramma::Constants qw/:const/;

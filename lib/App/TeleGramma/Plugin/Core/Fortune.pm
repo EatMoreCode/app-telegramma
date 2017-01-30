@@ -1,5 +1,7 @@
 package App::TeleGramma::Plugin::Core::Fortune;
 
+# ABSTRACT: TeleGramma plugin to emit fortunes
+
 use Mojo::Base 'App::TeleGramma::Plugin::Base';
 use App::TeleGramma::BotAction::Listen;
 use App::TeleGramma::Constants qw/:const/;

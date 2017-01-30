@@ -1,5 +1,7 @@
 package App::TeleGramma::Config;
 
+# ABSTRACT: TeleGramma and TeleGramma plugin configuration
+
 use Mojo::Base -base;
 use File::Spec::Functions qw/catdir/;
 use Config::INI::Writer 0.025;

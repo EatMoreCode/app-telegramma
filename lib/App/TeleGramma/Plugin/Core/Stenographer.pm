@@ -1,5 +1,7 @@
 package App::TeleGramma::Plugin::Core::Stenographer;
 
+# ABSTRACT: TeleGramma plugin to log all text messages
+
 use Mojo::Base 'App::TeleGramma::Plugin::Base';
 use App::TeleGramma::BotAction::ListenAll;
 use App::TeleGramma::Constants qw/:const/;

@@ -1,5 +1,7 @@
 package App::TeleGramma::Constants;
 
+# ABSTRACT: Constants for TeleGramma
+
 use strict;
 use warnings;
 

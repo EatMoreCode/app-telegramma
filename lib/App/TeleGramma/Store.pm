@@ -1,5 +1,7 @@
 package App::TeleGramma::Store;
 
+# ABSTRACT: Persistent datastore for TeleGramma and plugins
+
 use Mojo::Base -base;
 use Storable qw/store retrieve/;
 use Carp qw/croak/;
