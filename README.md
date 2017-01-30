@@ -23,7 +23,8 @@ The first time run, a basic configuration file is automatically created for you.
     The configuration will have an entry for each plugin currently available on
     your system, but disabled.
 
-Edit the config file, adding (at least) the Telegram Bot API key.
+Edit the config file, adding (at least) the Telegram Bot API key. You can get
+an API key from the @botfather bot on Telegram.
 
 Now you can run, first in foreground mode for testing purposes:
 
