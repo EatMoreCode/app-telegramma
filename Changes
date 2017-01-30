@@ -1,5 +1,9 @@
 {{$NEXT}}
 
+Update metadata to point to github.
+
+0.02      2017-01-30 23:25:13+10:30 Australia/Adelaide
+
 Fix problem test which referred to a missing plugin.
 
 0.01      2017-01-30 23:13:01+10:30 Australia/Adelaide
