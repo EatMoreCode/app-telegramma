@@ -6,13 +6,15 @@ use App::TeleGramma::Constants qw/:const/;
 has 'command';
 has 'response';
 
+sub can_listen { 1 }
+
 sub process_message {
   my $self = shift;
   my $msg  = shift;
 
   my $cmd = $self->command;
 
-  if ($msg->text =~ /^\Q$cmd\E \b @? /x) {
+  if ($msg->text && $msg->text =~ /^\Q$cmd\E \b @? /x) {
     return $self->response->($msg);
   }
 

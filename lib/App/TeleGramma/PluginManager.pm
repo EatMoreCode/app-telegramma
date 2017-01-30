@@ -36,7 +36,7 @@ sub load_plugins {
       # register it
       my @botactions = $o->register;
       foreach my $ba (@botactions) {
-        if (ref($ba) eq 'App::TeleGramma::BotAction::Listen') {
+        if ($ba->can_listen) {
           push @{ $self->listeners }, $ba;
         }
       }

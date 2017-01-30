@@ -68,11 +68,17 @@ sub reply_to {
   $app->send_message_to_chat_id($msg->chat->id, $reply);
 }
 
+sub data_dir {
+  my $self = shift;
+  my $data_dir = catdir($self->app_config->path_plugin_data, $self->short_name);
+  mkdir $data_dir unless -d $data_dir;
+  return $data_dir;
+}
+
 sub store {
   my $self = shift;
   return $self->_store if ($self->_store);
-  my $data_dir = catdir($self->app_config->path_plugin_data, $self->short_name);
-  mkdir $data_dir unless -d $data_dir;
+  my $data_dir = $self->data_dir;
   my $store_dir = catdir($data_dir, 'store');
   mkdir $store_dir unless -d $store_dir;
 
