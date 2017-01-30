@@ -9,6 +9,7 @@ App::TeleGramma - A modular Telegram Bot
 =head1 SYNOPSIS
 
 Install App::TeleGramma and its dependencies
+
    $ cpanm App::TeleGramma
 
 The first time run, a basic configuration file is automatically created for you.
