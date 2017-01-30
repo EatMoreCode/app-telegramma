@@ -4,6 +4,6 @@ TODO
 ☐ Moar tests
 ☑ Command line processing
 ☑ Daemon mode
-☐ Create README
+☑ Create README
 ☑ Create logging plugin
 ☐ Create timezone plugin (with interactive config)
