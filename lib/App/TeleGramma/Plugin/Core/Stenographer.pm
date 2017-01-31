@@ -46,8 +46,16 @@ sub log_message {
   return PLUGIN_NO_RESPONSE unless $msg->text;  # don't try to deal with anything but text
 
   my $fh = $self->log_fh_for_message($msg);
-  my $username = 'unknown';
-  $username = $msg->from->username if ($msg->from);
+  my $username;
+  if ($msg->from && $msg->from->username) {
+    $username = $msg->from->username;
+  }
+  elsif ($msg->from) {
+    $username = $msg->from->id;
+  }
+  else {
+    $username = "unknown";
+  }
 
   my $text = sprintf("%-26s %s: %s\n", scalar localtime, $username, $msg->text);
   print $fh $text;
