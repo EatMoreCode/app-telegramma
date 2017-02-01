@@ -2,6 +2,21 @@ package App::TeleGramma::Store;
 
 # ABSTRACT: Persistent datastore for TeleGramma and plugins
 
+=head1 SYNOPSIS
+
+  my $store = App::TeleGramma::Store->new(path => "/some/dir");
+  my $hashref1 = $store->hash('mydata-1');
+  $hashref1->{foo} = 'bar';
+  $hashref1->{bar} = 'baz';
+  $store->save('mydata-1');  # persisted
+
+  my $hashref2 = $store->hash('mydata-2'); # new data structure
+  $hashref2->{users} = [ qw/ a b c / ];
+
+  $store->save_all;  # persist data in both the 'mydata1' hash and the 'mydata2' hash
+
+=cut
+
 use Mojo::Base -base;
 use Storable qw/store retrieve/;
 use Carp qw/croak/;
@@ -9,6 +24,14 @@ use File::Spec::Functions qw/catfile/;
 
 has 'path';
 has 'dbs' => sub { {} };
+
+=method hash
+
+Return the hash reference for a named entry in your data store. Note that
+the names become disk filenames, and thus must consist of alphanumeric characters
+or '-' only.
+
+=cut
 
 sub hash {
   my $self = shift;
@@ -50,6 +73,18 @@ sub read_db_into_hash {
   return retrieve($db_file);
 }
 
+=method save
+
+Save a named hash to the data store.
+
+References are saved using L<Storable> and the limitations in terms of data
+stored can be found in that documenation.
+
+In general, if you stick with simple hashrefs, arrayrefs and scalars you will
+be fine.
+
+=cut
+
 sub save {
   my $self = shift;
   my $db   = shift;
@@ -57,6 +92,12 @@ sub save {
   my $db_file = catfile($self->path, $db);
   store($self->hash($db), $db_file);
 }
+
+=method save_all
+
+Persist all named hashrefs to the store at once.
+
+=cut
 
 sub save_all {
   my $self = shift;

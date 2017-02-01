@@ -1,6 +1,8 @@
 {{$NEXT}}
 
-Fix Stenographer plugin when logging entries for users with no username
+Fix Stenographer plugin when logging entries for users with no username.
+
+Improve documentation.
 
 0.04      2017-01-31 10:22:19+10:30 Australia/Adelaide
 
