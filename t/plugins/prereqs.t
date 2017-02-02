@@ -10,14 +10,14 @@ use File::Spec::Functions qw/catdir catfile/;
 
 my $td = tempdir( CLEANUP => 1 );
 
-mkdir catdir($td, 'App');
-mkdir catdir($td, 'App', 'TeleGramma');
-mkdir catdir($td, 'App', 'TeleGramma', 'Plugin');
-mkdir catdir($td, 'App', 'TeleGramma', 'Plugin', 'Test');
+mkdir catdir($td, 'App')                                   || die "Cannot create $td/App: $!";
+mkdir catdir($td, 'App', 'TeleGramma')                     || die "Cannot create $td/App/TeleGramma: $!";
+mkdir catdir($td, 'App', 'TeleGramma', 'Plugin')           || die "Cannot create $td/App/TeleGramma/Plugin: $!";
+mkdir catdir($td, 'App', 'TeleGramma', 'Plugin', 'Test')   || die "Cannot create $td/App/TeleGramma/Plugin/Test: $!";
 
 my $dir = catdir($td, qw/App TeleGramma Plugin Test/);
 
-open my $fh, ">", catfile($dir, "TestPrereq.pm") || die $!;
+open my $fh, ">", catfile($dir, "TestPrereq.pm") || die "Cannot create TestPrereq.pm: $!";
 
 print $fh "package App::TeleGramma::Plugin::Test::TestPrereq;\n";
 print $fh "use Mojo::Base 'App::TeleGramma::Plugin::Base';\n";
