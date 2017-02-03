@@ -1,5 +1,7 @@
 {{$NEXT}}
 
+Require Module::Pluggable v5.2 to ensure we have search_dirs.
+
 0.05      2017-02-02 14:34:53+10:30 Australia/Adelaide
 
 Fix Stenographer plugin when logging entries for users with no username.
