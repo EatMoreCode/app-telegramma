@@ -1,5 +1,7 @@
 {{$NEXT}}
 
+Pass the 'body' of a command to App::TeleGramma::BotAction::Listen users.
+
 0.06      2017-02-03 14:45:52+10:30 Australia/Adelaide
 
 Require Module::Pluggable v5.2 to ensure we have search_dirs.
