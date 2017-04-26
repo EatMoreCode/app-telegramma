@@ -7,7 +7,6 @@ use App::TeleGramma::BotAction::Listen;
 use App::TeleGramma::Constants qw/:const/;
 
 use File::Spec::Functions qw/catfile/;
-use Mojo::Util qw/slurp/;
 
 my $regex = qr/^thanks [,]? \s* (\w+)/xi;
 #$regex = qr/(a)/i;

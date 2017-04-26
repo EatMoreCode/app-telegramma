@@ -1,5 +1,7 @@
 {{$NEXT}}
 
+Use newest Mojolicious and change from deprecated/removed functions.
+
 0.07      2017-03-16 20:15:29+10:30 Australia/Adelaide
 
 Support for commands to be bare regexes.

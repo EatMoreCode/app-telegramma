@@ -7,7 +7,7 @@ use App::TeleGramma::BotAction::Listen;
 use App::TeleGramma::Constants qw/:const/;
 
 use File::Spec::Functions qw/catfile/;
-use Mojo::Util qw/slurp/;
+use Mojo::File;
 
 sub synopsis {
   "Responds with fortunes"
@@ -82,7 +82,7 @@ sub _get_fortune {
   closedir($dh);
 
   my $file = $files[rand @files];
-  my $entries = slurp(catfile($path, $file));
+  my $entries = Mojo::File->new(catfile($path, $file))->slurp;
 
   my @entries = split /^%$/m, $entries;
   my $entry = $entries[rand @entries];
