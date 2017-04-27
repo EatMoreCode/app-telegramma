@@ -1,5 +1,7 @@
 {{$NEXT}}
 
+Fix bug where the /timer plugin would always respond with help.
+
 0.09      2017-04-27 15:35:34+09:30 Australia/Adelaide
 
 New plugin App::TeleGramma::Plugin::Core::Timer to allow users to set timers.

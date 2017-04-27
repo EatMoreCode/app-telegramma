@@ -36,7 +36,7 @@ sub timer_help {
   my $self = shift;
   my $msg  = shift;
   $self->reply_to($msg, "examples: /timer remind me to weed and feed in 3 hours");
-  return PLUGIN_RESPONDED;
+  return PLUGIN_RESPONDED_LAST;
 }
 
 sub timer_set {
@@ -55,23 +55,23 @@ sub timer_set {
   my ($timer_text, $duration_text) = ($request =~ /^\s*(.+)\s+in\s+(\d.*)/);
   if (! $duration_text) {
     $self->reply_to($msg, "sorry, I can't work out when you mean from '$text'");
-    return PLUGIN_RESPONDED;
+    return PLUGIN_RESPONDED_LAST;
   }
 
   my $duration = eval { parse_duration($duration_text) };
   if ($@ || ! $duration) {
     $self->reply_to($msg, "sorry, I can't work out when you mean from '$duration_text'");
-    return PLUGIN_RESPONDED;
+    return PLUGIN_RESPONDED_LAST;
   }
 
   Mojo::IOLoop->timer($duration => sub {
     my $loop = shift;
-    my $message = "Hey " . $msg->from->username . ", this is your reminder to $timer_text";
+    my $message = "Hey \@" . $msg->from->username . ", this is your reminder to $timer_text";
     $self->reply_to($msg, $message);
   });
 
   $self->reply_to($msg, "Will remind you '$timer_text' in $duration_text");
-  return PLUGIN_RESPONDED;
+  return PLUGIN_RESPONDED_LAST;
 }
 
 1;
