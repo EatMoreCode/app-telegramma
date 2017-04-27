@@ -47,8 +47,6 @@ TeleGramma is an easy to use, extensible bot to use with Telegram C<www.telegram
 Its plugin architecture makes it easy to add new modules either from other authors,
 or yourself.
 
-
-
 =head1 BUGS
 
 None known.

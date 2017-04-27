@@ -24,6 +24,8 @@ my $daemon_mode = 1;
 my $verbose     = 0;
 my $shutdown    = 0;
 my $status      = 0;
+my $version     = 0;
+my $help        = 0;
 my $plugin_cmd;
 
 GetOptions(
@@ -31,14 +33,56 @@ GetOptions(
   "status"   => \$status,
   "shutdown" => \$shutdown,
   "verbose"  => \$verbose,
+  "version"  => \$version,
+  "help"     => \$help,
   "plugin=s" => \$plugin_cmd,
 ) || die "Bad command line\n";
 
 my $bot = App::TeleGramma->new;
 $bot->startup;
 
+if ($version) {
+  say "Version " . $App::TeleGramma::VERSION;
+  exit 0;
+}
+
+if ($help) {
+  my $cp = $bot->config->path_base;
+
+  my $bin = `which telegramma`;
+
+  if ($bin) {
+    $bin = "telegramma";
+  }
+  else {
+    $bin = $0;
+  }
+
+  say <<EOF;
+App::TeleGramma v$App::TeleGramma::VERSION
+https://metacpan.org/release/App-TeleGramma
+
+Configuration is stored in $cp (automatically created on first run).
+
+Starting and managing:
+
+  $bin             # start in daemon mode
+  $bin --status    # show running process status
+  $bin --shutdown  # shut down running process
+
+Plugins:
+
+  $bin --plugins list  # list available plugins
+
+Other options:
+
+  --no-daemon    # run in foreground
+EOF
+  exit;
+}
+
 if ($plugin_cmd && $plugin_cmd eq 'list') {
-  say "enabled plugins:";
+  say "Enabled plugins:";
   foreach (@{ $bot->plugins->list }) {
     say " - " . $_->truncated_package_name . " - " . $_->synopsis;
   }
@@ -94,4 +138,3 @@ else {
     exit; # next reached
   }
 }
-#     $SIG{'INT'} = sub { exit; };
