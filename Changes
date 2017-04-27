@@ -1,5 +1,7 @@
 {{$NEXT}}
 
+New plugin App::TeleGramma::Plugin::Core::Timer to allow users to set timers.
+
 0.08      2017-04-26 16:46:46+09:30 Australia/Adelaide
 
 Use newest Mojolicious and change from deprecated/removed functions.
