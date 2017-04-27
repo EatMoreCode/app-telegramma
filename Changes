@@ -1,5 +1,7 @@
 {{$NEXT}}
 
+0.11      2017-04-27 22:38:32+09:30 Australia/Adelaide
+
 Clean up command line options, add --help and --version.
 
 0.10      2017-04-27 20:36:19+09:30 Australia/Adelaide
