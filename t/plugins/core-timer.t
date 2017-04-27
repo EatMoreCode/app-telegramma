@@ -32,7 +32,7 @@ $msg->from($user);
 $expected_text = "examples: /timer remind me to weed and feed in 3 hours";
 $expected_chat_id = 123;
 $msg->text("/timer");
-is ($h_l->process_message($msg), PLUGIN_RESPONDED);
+is ($h_l->process_message($msg), PLUGIN_RESPONDED_LAST);
 is ($count, 1);
 
 # non matching help
@@ -47,7 +47,7 @@ is($a_l->process_message($msg), PLUGIN_DECLINED);
 $expected_text = "sorry, I can't work out when you mean from '/timer remind me to impeach Trump tomorrow'";
 $expected_chat_id = 123;
 $msg->text("/timer remind me to impeach Trump tomorrow");
-is($a_l->process_message($msg), PLUGIN_RESPONDED);
+is($a_l->process_message($msg), PLUGIN_RESPONDED_LAST);
 is ($count, 2);
 
 # set a timer
@@ -59,7 +59,7 @@ is ($count, 3);
 
 # sleep and see that we get the timer message
 #sleep 1;
-$expected_text = "Hey fred, this is your reminder to weed and feed";
+$expected_text = "Hey \@fred, this is your reminder to weed and feed";
 $expected_chat_id = 123;
 Mojo::IOLoop->one_tick;
 is ($count, 4, 'now received 4 replies');
@@ -79,7 +79,7 @@ $msg->text("/timer remind me to weed and feed in 5 seconds");
 $a_l->process_message($msg);
 is ($count, 6);
 
-$expected_text = "Hey fred, this is your reminder to weed and feed";
+$expected_text = "Hey \@fred, this is your reminder to weed and feed";
 $expected_chat_id = 123;
 Mojo::IOLoop->one_tick;
 is ($count, 7);
