@@ -7,3 +7,4 @@ TODO
 ☑ Create README
 ☑ Create logging plugin
 ☐ Create timezone plugin (with interactive config)
+☐ Make Plugin::Core::Timer persist data across restarts
