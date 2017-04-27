@@ -3,6 +3,7 @@
 0.10      2017-04-27 20:36:19+09:30 Australia/Adelaide
 
 Fix bug where the /timer plugin would always respond with help.
+
 When timer expires, include the @username of the requester.
 
 0.09      2017-04-27 15:35:34+09:30 Australia/Adelaide
