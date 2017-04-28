@@ -1,5 +1,7 @@
 {{$NEXT}}
 
+0.12      2017-04-28 23:51:09+09:30 Australia/Adelaide
+
 New plugin App::TeleGramma::Plugin::Core::YearProgress, keep abreast of the
 terrifyingly fast progress of the year.
 
