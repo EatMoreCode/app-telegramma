@@ -87,7 +87,7 @@ be fine.
 
 sub save {
   my $self = shift;
-  my $db   = shift;
+  my $db   = shift || die "no db?";
 
   my $db_file = catfile($self->path, $db);
   store($self->hash($db), $db_file);
