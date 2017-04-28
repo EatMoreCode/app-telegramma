@@ -4,7 +4,7 @@ App::TeleGramma - A modular Telegram Bot
 
 # VERSION
 
-version 0.11
+version 0.12
 
 # SYNOPSIS
 
