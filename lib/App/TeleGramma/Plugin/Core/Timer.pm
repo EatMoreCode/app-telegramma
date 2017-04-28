@@ -54,13 +54,13 @@ sub timer_set {
   # try to parse the thing, starting at the first number
   my ($timer_text, $duration_text) = ($request =~ /^\s*(.+)\s+in\s+(\d.*)/);
   if (! $duration_text) {
-    $self->reply_to($msg, "sorry, I can't work out when you mean from '$text'");
+    $self->reply_to($msg, "Sorry, I can't work out when you mean from '$text'");
     return PLUGIN_RESPONDED_LAST;
   }
 
   my $duration = eval { parse_duration($duration_text) };
   if ($@ || ! $duration) {
-    $self->reply_to($msg, "sorry, I can't work out when you mean from '$duration_text'");
+    $self->reply_to($msg, "Sorry, I can't work out when you mean from '$duration_text'");
     return PLUGIN_RESPONDED_LAST;
   }
 
