@@ -44,7 +44,7 @@ $msg->text("/blah blah");
 is($a_l->process_message($msg), PLUGIN_DECLINED);
 
 # bad entry
-$expected_text = "sorry, I can't work out when you mean from '/timer remind me to impeach Trump tomorrow'";
+$expected_text = "Sorry, I can't work out when you mean from '/timer remind me to impeach Trump tomorrow'";
 $expected_chat_id = 123;
 $msg->text("/timer remind me to impeach Trump tomorrow");
 is($a_l->process_message($msg), PLUGIN_RESPONDED_LAST);
@@ -65,7 +65,7 @@ Mojo::IOLoop->one_tick;
 is ($count, 4, 'now received 4 replies');
 
 # bad timer
-$expected_text = "sorry, I can't work out when you mean from '1 hogshead'";
+$expected_text = "Sorry, I can't work out when you mean from '1 hogshead'";
 $expected_chat_id = 123;
 $msg->text("/timer remind me to weed and feed in 1 hogshead");
 $a_l->process_message($msg);
