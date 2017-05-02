@@ -1,5 +1,7 @@
 {{$NEXT}}
 
+0.13      2017-05-02 20:58:33+09:30 Australia/Adelaide
+
 Reduce frequency of YearProgress check, and capture failures to send messages.
 
 0.12      2017-04-28 23:51:09+09:30 Australia/Adelaide
