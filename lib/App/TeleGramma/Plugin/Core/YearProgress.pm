@@ -29,7 +29,7 @@ sub register {
     response => sub { $self->yp_stop(@_) }
   );
 
-  Mojo::IOLoop->recurring(1 => sub {
+  Mojo::IOLoop->recurring(60 => sub {
     my $loop = shift;
     $self->send_out_progress_if_necessary;
   });
