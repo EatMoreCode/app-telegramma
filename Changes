@@ -1,5 +1,7 @@
 {{$NEXT}}
 
+Reduce frequency of YearProgress check, and capture failures to send messages.
+
 0.12      2017-04-28 23:51:09+09:30 Australia/Adelaide
 
 New plugin App::TeleGramma::Plugin::Core::YearProgress, keep abreast of the
