@@ -78,7 +78,11 @@ sub send_alerts {
   $bar .= " ${percent}%";
   foreach my $id (@alertees) {
     my $username = $self->store->hash('registered')->{$id}->{username};
-    $self->app->send_message_to_chat_id($id, "Hey $username, the year is progressing: $bar");
+    eval {
+      $self->app->send_message_to_chat_id($id, "Hey $username, the year is progressing: $bar");
+    } or do {
+      warn "Could not send message to $username - $@";
+    };
   }
 }
 
