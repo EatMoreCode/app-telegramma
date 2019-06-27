@@ -72,7 +72,7 @@ Starting and managing:
 
 Plugins:
 
-  $bin --plugins list  # list available plugins
+  $bin --plugin list  # list available plugins
 
 Other options:
 
