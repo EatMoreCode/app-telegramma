@@ -1,5 +1,7 @@
 {{$NEXT}}
 
+Fix typo in --help output.
+
 0.13      2017-05-02 20:58:33+09:30 Australia/Adelaide
 
 Reduce frequency of YearProgress check, and capture failures to send messages.
